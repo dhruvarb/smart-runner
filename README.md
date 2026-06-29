@@ -2,139 +2,110 @@
 
 ![Smart Runner banner](media/banner.png)
 
-Smart Runner is a Visual Studio Code extension for running selected code snippets with locally installed interpreters and compilers.
+Smart Runner is a Visual Studio Code extension for running selected code snippets with locally installed interpreters and compilers. It is built for quick snippet execution, automatic same-file dependency inclusion, and AI-assisted code explanation, optimization, and error help.
 
-## Sprint 1 Status
+## What It Does
 
-- Extension skeleton created.
-- TypeScript build configured.
-- `Smart Runner: Run Selected Snippets` command registered.
-- Command activates the extension and confirms execution with a notification.
+- Runs selected code blocks from the editor.
+- Supports multiple selections.
+- Automatically includes obvious same-file dependencies such as variables, imports, functions, and classes.
+- Warns when referenced dependencies are not found.
+- Runs snippets in the integrated terminal.
+- Adds visible `Run Selection` buttons above selected code and in the status bar.
+- Supports Python, JavaScript, TypeScript, C, C++, Java, Go, and Rust.
+- Provides optional BYO-key AI tools for explaining, fixing, optimizing, documenting, and testing code.
 
-## Sprint 2 Status
+## Quick Start
 
-- Active editor lookup added.
-- Single and multiple selections are collected in editor order.
-- Empty and whitespace-only selections are ignored.
-- Exact duplicate ranges are ignored.
-- Selected snippets are merged with formatting preserved.
+Install dependencies:
 
-## Sprint 3 Status
+```bash
+npm install
+```
 
-- Temporary snippet files are created under the OS temp directory.
-- Each run gets a unique temporary workspace.
-- The detected language extension is preserved.
-- Temporary files are cleaned up automatically after preparation.
+Run the extension in development:
 
-## Sprint 4 Status
+1. Open this repository in VS Code.
+2. Press `F5`.
+3. A new Extension Development Host window opens.
+4. Open a code file in that new window.
+5. Select a block of code.
+6. Click `Run Selection` above the selection, or run `Smart Runner: Run Selected Snippets`.
 
-- Current editor language is detected from VS Code's `languageId`.
-- Python, JavaScript, and TypeScript are supported.
-- Unsupported languages show a clear warning.
-- A language registry is in place for future C, C++, Java, Go, and Rust support.
+## Running Selected Code
 
-## Sprint 5 Status
+Smart Runner can run selected snippets from:
 
-- Execution commands are built for Python, JavaScript, and TypeScript.
-- Snippets run from generated temporary files.
-- Standard output, standard error, and exit codes are captured.
-- Results can be captured by the lower-level execution engine for future testing and diagnostics.
+- CodeLens above selected code: `Run Selection`
+- Status bar: `Run Selection`
+- Command Palette: `Smart Runner: Run Selected Snippets`
+- Keyboard shortcut: `Ctrl+Shift+R`
+- Editor run dropdown: `Smart Runner: Run Selected Snippets`
+- Right-click context menu: `Smart Runner: Run Selected Snippets`
 
-Current commands:
+Example:
 
-- Python: `python temp.py`
-- JavaScript: `node temp.js`
-- TypeScript: `tsx temp.ts`
+```python
+x = 10
+y = 20
 
-## Sprint 6 Status
+print(x + y)
+```
 
-- Snippets run in a reusable integrated VS Code terminal.
-- The terminal is focused when a snippet is sent.
-- Running and submitted notifications are shown.
+If you select only:
 
-## Sprint 7 Status
+```python
+print(x + y)
+```
 
-- Command Palette entry: `Smart Runner: Run Selected Snippets`.
-- Editor title run button and editor run-dropdown entry.
-- Editor context menu entry for selected code.
-- Default keybinding: `Ctrl+Shift+R` on Windows/Linux and `Cmd+Shift+R` on macOS.
+Smart Runner creates a temporary runnable file that includes:
 
-## Sprint 8 Status
+```python
+x = 10
 
-- Compiled-language command support added for C, C++, Java, Go, and Rust.
-- C, C++, and Rust compile to a temporary executable and then run it.
-- Java compiles with `javac` and runs `Main` from the temporary directory.
-- Go uses `go run`.
+y = 20
 
-Current compiled commands:
+print(x + y)
+```
 
-- C: `gcc temp.c -o snippet && snippet`
-- C++: `g++ temp.cpp -o snippet && snippet`
-- Java: `javac Main.java && java -cp temp-dir Main`
-- Go: `go run temp.go`
-- Rust: `rustc temp.rs -o snippet && snippet`
+If a dependency cannot be found, Smart Runner warns before running.
 
-## Sprint 9 Status
+## AI Features
 
-- VS Code settings added for interpreter and compiler paths.
-- Temporary directory, terminal reuse, compiler arguments, timeout, environment variables, and working directory settings are available.
-- Interpreter/compiler paths and compiler arguments are used by the command builder.
-- Terminal reuse and temporary directory settings are wired into runtime behavior.
+Smart Runner AI uses your own provider and API key. API keys are stored with VS Code Secret Storage and are never written to project files or settings.
 
-## Sprint 10 Status
+Supported providers:
 
-- A same-file dependency resolver is in place.
-- Referenced variables, imports, functions, and class definitions are prepended when obvious matches are found.
-- The resolver supports Python, JavaScript, TypeScript, C, C++, Java, Go, and Rust with lightweight heuristics.
-- Smart Runner warns before running when referenced dependencies cannot be found in the current file.
-- Example: selecting `print(x + y)` in Python also includes earlier `x = ...` and `y = ...` assignments.
+- Gemini
+- OpenAI
+- Anthropic
+- Groq
+- OpenRouter
+- Ollama
+- LM Studio
 
-## Sprint 11 Status
+Available AI actions:
 
-- If no code is selected, Smart Runner attempts to run the current function or class around the cursor.
-- Python indentation blocks and brace-based language blocks are supported with lightweight detection.
+- Explain selected code
+- Explain algorithm
+- Explain time complexity
+- Explain space complexity
+- Optimize code
+- Generate test cases
+- Generate documentation
+- Refactor code
+- Fix code
+- Explain error
 
-## Sprint 12 Status
+## AI Setup
 
-- Recent executions are persisted in VS Code global state.
-- `Smart Runner: Rerun Last Snippet` reruns the latest item.
-- `Smart Runner: Show Execution History` opens a Quick Pick list of recent snippets.
-- History is capped at 50 items.
-
-## Sprint 13 Status
-
-- Unit test infrastructure added with Node's built-in test runner.
-- Execution command builder tests cover interpreted and compiled-language commands.
-- Temporary file creation and cleanup are covered.
-
-## Sprint 15 Status
-
-- Bring-your-own-key AI integration added.
-- Providers: Gemini, OpenAI, Anthropic, Groq, OpenRouter, Ollama, and LM Studio.
-- API keys are stored with VS Code Secret Storage, not in settings or project files.
-- Local providers Ollama and LM Studio do not require API keys.
-- AI commands added for explaining code, explaining algorithms, time/space complexity, optimizing, generating tests, generating docs, refactoring, fixing code, and explaining pasted errors.
-- AI output is written to the `Smart Runner AI` output channel.
-- CodeLens buttons appear above selected code blocks for run, explain, fix, explain-error, and optimize actions.
-- Status-bar `Run Selection`, `Explain Selection`, and `Explain Error` buttons appear while code is selected.
-- AI quick fixes appear in the lightbulb menu when VS Code diagnostics are available.
-- `Smart Runner AI: Help` opens an in-editor guide for setup, selected-code actions, and error actions.
-
-### AI Setup
-
-Choose a provider:
+Open the Command Palette and run:
 
 ```text
 Smart Runner: Choose AI Provider
 ```
 
-Open AI help:
-
-```text
-Smart Runner AI: Help
-```
-
-Store or update a key for remote providers:
+For remote providers, add your key:
 
 ```text
 Smart Runner: Add or Update AI API Key
@@ -146,29 +117,21 @@ Test the connection:
 Smart Runner: Test AI Connection
 ```
 
-Remove a stored key:
+Open the built-in AI help panel:
 
 ```text
-Smart Runner: Remove AI API Key
+Smart Runner AI: Help
 ```
 
-### AI Security Model
+## AI Editor Buttons
 
-- API keys are stored only in VS Code Secret Storage.
-- API keys are never written to `settings.json`, `package.json`, temporary files, or project files.
-- API keys are only sent to the selected provider.
-- Error messages are redacted before being shown.
-- Local providers can be used with no API key.
-
-### AI Editor Shortcuts
-
-Select code and use the CodeLens above the selection:
+When code is selected, Smart Runner shows CodeLens buttons above the selection:
 
 ```text
 Run Selection | Explain Selection | Fix | Explain Error | Optimize
 ```
 
-Or use the status bar:
+The status bar also shows:
 
 ```text
 Run Selection
@@ -176,24 +139,31 @@ Explain Selection
 Explain Error
 ```
 
-When VS Code shows an error lightbulb, open it and choose:
+When VS Code reports diagnostics, Smart Runner also adds AI quick fixes to the lightbulb menu:
 
 ```text
 Smart Runner AI: Fix Code
 Smart Runner AI: Explain Error
 ```
 
-If those buttons do not appear, make sure VS Code's `editor.codeLens` setting and Smart Runner's `smartRunner.ai.selectionCodeLens` setting are both enabled.
+## Supported Languages
+
+| Language | Command |
+| --- | --- |
+| Python | `python snippet.py` |
+| JavaScript | `node snippet.js` |
+| TypeScript | `tsx snippet.ts` |
+| C | `gcc snippet.c -o snippet && snippet` |
+| C++ | `g++ snippet.cpp -o snippet && snippet` |
+| Java | `javac Main.java && java -cp temp-dir Main` |
+| Go | `go run snippet.go` |
+| Rust | `rustc snippet.rs -o snippet && snippet` |
+
+Smart Runner uses tools installed on your machine. It does not install compilers or interpreters.
 
 ## Development
 
-For a full setup guide, see [SETUP.md](SETUP.md).
-
-Install dependencies:
-
-```bash
-npm install
-```
+For the full setup guide, see [SETUP.md](SETUP.md).
 
 Compile:
 
@@ -207,63 +177,73 @@ Run tests:
 npm test
 ```
 
-Build a VSIX:
+Package a VSIX:
 
 ```bash
 npm run package
 ```
 
-Launch the extension from VS Code with the Extension Development Host.
+Install the generated VSIX:
 
-## FAQ
+1. Open VS Code.
+2. Run `Extensions: Install from VSIX...`.
+3. Select `smart-runner-0.0.1.vsix`.
+4. Reload VS Code.
 
-**Does Smart Runner install compilers or interpreters?**
-No. It uses tools already available on your machine, such as `python`, `node`, `gcc`, `javac`, `go`, or `rustc`.
+## Configuration
 
-**Can I customize tool paths?**
-Yes. Use the `smartRunner.*Path` settings in VS Code.
+Smart Runner settings are available under `smartRunner.*` and `smartRunner.ai.*`.
 
-**Does dependency resolution use a full AST?**
-Not yet. Sprint 10 uses same-file heuristics for variables, imports, functions, and classes, and warns when names are unresolved. AST-based dependency resolution remains a future hardening task.
+Useful settings:
 
-## Known Issues
+- `smartRunner.pythonPath`
+- `smartRunner.nodePath`
+- `smartRunner.tsxPath`
+- `smartRunner.cCompilerPath`
+- `smartRunner.cppCompilerPath`
+- `smartRunner.javaPath`
+- `smartRunner.javacPath`
+- `smartRunner.goPath`
+- `smartRunner.rustCompilerPath`
+- `smartRunner.reuseTerminal`
+- `smartRunner.ai.provider`
+- `smartRunner.ai.model`
+- `smartRunner.ai.baseUrl`
+- `smartRunner.ai.selectionCodeLens`
 
-- TypeScript snippets require `tsx` to be installed or configured.
-- Java snippets are run as `Main`, so selected Java code should fit that entry-point model.
-- Terminal execution keeps temporary files by default so commands can run reliably after being sent to the terminal.
+## Troubleshooting
 
-## Marketplace Release Checklist
+If CodeLens buttons do not appear:
 
-- Update `publisher` in `package.json`.
-- Replace the placeholder repository URL.
-- Add screenshots or GIF demonstrations.
-- Run `npm test`.
-- Run `npm run package`.
-- Publish the generated VSIX with a verified publisher account.
+```json
+"editor.codeLens": true,
+"smartRunner.ai.selectionCodeLens": true
+```
+
+If TypeScript snippets fail, install or configure `tsx`.
+
+If Java snippets fail, make sure the selected code fits the `Main.java` entry-point model.
+
+If AI commands fail, run:
+
+```text
+Smart Runner: Test AI Connection
+```
+
+If a selected snippet fails because of a missing name, check the warning shown by Smart Runner. The dependency resolver uses same-file heuristics and is not a full AST engine yet.
+
+## Security
+
+- API keys are stored only in VS Code Secret Storage.
+- API keys are never written to `settings.json`, `package.json`, temporary files, or project files.
+- API keys are sent only to the selected provider.
+- Error messages are redacted before being shown.
+- Local providers can be used with no API key.
 
 ## Roadmap
 
-The project is being built sprint by sprint from the Agile Development Roadmap:
-
-1. Project Foundation
-2. Selection Engine
-3. Temporary File Manager
-4. Language Detection
-5. Execution Engine
-6. Terminal Integration
-7. User Experience
-8. Multi-Language Support
-9. Configuration System
-10. Smart Dependency Resolver
-11. Execute Current Function
-12. Execution History
-13. Testing
-14. Marketplace Release
-15. AI Integration
-
-## Future Roadmap
-
 - AST-backed dependency resolution.
+- Captured execution mode for automatic terminal-error explanation.
 - Debugger integration.
 - Rich execution diagnostics.
 - Shareable snippets and synchronized history.

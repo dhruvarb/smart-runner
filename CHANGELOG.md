@@ -27,3 +27,4 @@
 - Added visible Run Selection CodeLens and status-bar buttons for selected code.
 - Added visible Explain Error CodeLens and status-bar buttons for selected code.
 - Added setup documentation and project banner.
+- Reworked README as GitHub-facing setup and usage documentation.
