@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Smart Runner icon placeholder</title>
+  <rect width="128" height="128" rx="18" fill="#15171c"/>
+  <path d="M29 64h38" stroke="#45d483" stroke-width="10" stroke-linecap="round"/>
+  <path d="M61 38l32 26-32 26z" fill="#f2c14e"/>
+  <circle cx="36" cy="88" r="7" fill="#63b3ed"/>
+  <circle cx="57" cy="88" r="7" fill="#63b3ed"/>
+</svg>

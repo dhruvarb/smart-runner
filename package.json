@@ -1,0 +1,362 @@
+{
+  "name": "smart-runner",
+  "displayName": "Smart Runner",
+  "description": "Run selected code snippets with local interpreters and compilers.",
+  "version": "0.0.1",
+  "publisher": "dhruvarb",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smart-runner/smart-runner.git"
+  },
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:smartRunner.runSelectedSnippets",
+    "onCommand:smartRunner.rerunLastSnippet",
+    "onCommand:smartRunner.showExecutionHistory",
+    "onCommand:smartRunner.ai.showHelp",
+    "onCommand:smartRunner.ai.chooseProvider",
+    "onCommand:smartRunner.ai.addOrUpdateApiKey",
+    "onCommand:smartRunner.ai.removeApiKey",
+    "onCommand:smartRunner.ai.testConnection",
+    "onCommand:smartRunner.ai.explainCode",
+    "onCommand:smartRunner.ai.explainAlgorithm",
+    "onCommand:smartRunner.ai.explainTimeComplexity",
+    "onCommand:smartRunner.ai.explainSpaceComplexity",
+    "onCommand:smartRunner.ai.optimizeCode",
+    "onCommand:smartRunner.ai.generateTests",
+    "onCommand:smartRunner.ai.generateDocumentation",
+    "onCommand:smartRunner.ai.refactorCode",
+    "onCommand:smartRunner.ai.fixCode",
+    "onCommand:smartRunner.ai.explainError"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "smartRunner.runSelectedSnippets",
+        "title": "Smart Runner: Run Selected Snippets",
+        "category": "Smart Runner",
+        "icon": "$(play)"
+      },
+      {
+        "command": "smartRunner.rerunLastSnippet",
+        "title": "Smart Runner: Rerun Last Snippet",
+        "category": "Smart Runner",
+        "icon": "$(debug-restart)"
+      },
+      {
+        "command": "smartRunner.showExecutionHistory",
+        "title": "Smart Runner: Show Execution History",
+        "category": "Smart Runner",
+        "icon": "$(history)"
+      },
+      {
+        "command": "smartRunner.ai.showHelp",
+        "title": "Smart Runner AI: Help",
+        "category": "Smart Runner AI",
+        "icon": "$(question)"
+      },
+      {
+        "command": "smartRunner.ai.chooseProvider",
+        "title": "Smart Runner: Choose AI Provider",
+        "category": "Smart Runner AI",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "smartRunner.ai.addOrUpdateApiKey",
+        "title": "Smart Runner: Add or Update AI API Key",
+        "category": "Smart Runner AI",
+        "icon": "$(key)"
+      },
+      {
+        "command": "smartRunner.ai.removeApiKey",
+        "title": "Smart Runner: Remove AI API Key",
+        "category": "Smart Runner AI",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "smartRunner.ai.testConnection",
+        "title": "Smart Runner: Test AI Connection",
+        "category": "Smart Runner AI",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "smartRunner.ai.explainCode",
+        "title": "Smart Runner AI: Explain Code",
+        "category": "Smart Runner AI",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "smartRunner.ai.explainAlgorithm",
+        "title": "Smart Runner AI: Explain Algorithm",
+        "category": "Smart Runner AI",
+        "icon": "$(symbol-event)"
+      },
+      {
+        "command": "smartRunner.ai.explainTimeComplexity",
+        "title": "Smart Runner AI: Explain Time Complexity",
+        "category": "Smart Runner AI",
+        "icon": "$(watch)"
+      },
+      {
+        "command": "smartRunner.ai.explainSpaceComplexity",
+        "title": "Smart Runner AI: Explain Space Complexity",
+        "category": "Smart Runner AI",
+        "icon": "$(database)"
+      },
+      {
+        "command": "smartRunner.ai.optimizeCode",
+        "title": "Smart Runner AI: Optimize Code",
+        "category": "Smart Runner AI",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "smartRunner.ai.generateTests",
+        "title": "Smart Runner AI: Generate Test Cases",
+        "category": "Smart Runner AI",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "smartRunner.ai.generateDocumentation",
+        "title": "Smart Runner AI: Generate Documentation",
+        "category": "Smart Runner AI",
+        "icon": "$(book)"
+      },
+      {
+        "command": "smartRunner.ai.refactorCode",
+        "title": "Smart Runner AI: Refactor Code",
+        "category": "Smart Runner AI",
+        "icon": "$(wrench)"
+      },
+      {
+        "command": "smartRunner.ai.fixCode",
+        "title": "Smart Runner AI: Fix Code",
+        "category": "Smart Runner AI",
+        "icon": "$(tools)"
+      },
+      {
+        "command": "smartRunner.ai.explainError",
+        "title": "Smart Runner AI: Explain Error",
+        "category": "Smart Runner AI",
+        "icon": "$(warning)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "smartRunner.runSelectedSnippets",
+          "group": "navigation@0",
+          "when": "editorTextFocus"
+        }
+      ],
+      "editor/title/run": [
+        {
+          "command": "smartRunner.runSelectedSnippets",
+          "group": "navigation@0",
+          "when": "editorTextFocus"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "smartRunner.runSelectedSnippets",
+          "group": "navigation",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "smartRunner.ai.explainCode",
+          "group": "smartRunnerAi@1",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "smartRunner.ai.fixCode",
+          "group": "smartRunnerAi@2",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "smartRunner.ai.optimizeCode",
+          "group": "smartRunnerAi@3",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "smartRunner.ai.showHelp",
+          "group": "smartRunnerAi@9",
+          "when": "editorTextFocus"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "smartRunner.runSelectedSnippets",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Smart Runner",
+      "properties": {
+        "smartRunner.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path or command used to run Python snippets."
+        },
+        "smartRunner.nodePath": {
+          "type": "string",
+          "default": "node",
+          "description": "Path or command used to run JavaScript snippets."
+        },
+        "smartRunner.tsxPath": {
+          "type": "string",
+          "default": "tsx",
+          "description": "Path or command used to run TypeScript snippets."
+        },
+        "smartRunner.javaPath": {
+          "type": "string",
+          "default": "java",
+          "description": "Path or command used to run compiled Java snippets."
+        },
+        "smartRunner.javacPath": {
+          "type": "string",
+          "default": "javac",
+          "description": "Path or command used to compile Java snippets."
+        },
+        "smartRunner.cCompilerPath": {
+          "type": "string",
+          "default": "gcc",
+          "description": "Path or command used to compile C snippets."
+        },
+        "smartRunner.cppCompilerPath": {
+          "type": "string",
+          "default": "g++",
+          "description": "Path or command used to compile C++ snippets."
+        },
+        "smartRunner.rustCompilerPath": {
+          "type": "string",
+          "default": "rustc",
+          "description": "Path or command used to compile Rust snippets."
+        },
+        "smartRunner.goPath": {
+          "type": "string",
+          "default": "go",
+          "description": "Path or command used to run Go snippets."
+        },
+        "smartRunner.temporaryDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Optional directory for Smart Runner temporary files. Uses the OS temp directory when empty."
+        },
+        "smartRunner.deleteTemporaryFiles": {
+          "type": "boolean",
+          "default": false,
+          "description": "Reserved setting for automatic temporary file cleanup after terminal execution."
+        },
+        "smartRunner.reuseTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Reuse the Smart Runner terminal between runs."
+        },
+        "smartRunner.compilerArguments": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional arguments passed to compiled-language compilers."
+        },
+        "smartRunner.timeout": {
+          "type": "number",
+          "default": 0,
+          "description": "Reserved timeout in milliseconds for non-terminal execution. Zero disables the timeout."
+        },
+        "smartRunner.environmentVariables": {
+          "type": "object",
+          "default": {},
+          "description": "Reserved environment variables for future execution modes."
+        },
+        "smartRunner.workingDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Reserved working directory for future execution modes. Uses the workspace or temp directory when empty."
+        },
+        "smartRunner.ai.provider": {
+          "type": "string",
+          "default": "gemini",
+          "enum": [
+            "gemini",
+            "openai",
+            "anthropic",
+            "groq",
+            "openrouter",
+            "ollama",
+            "lmstudio"
+          ],
+          "enumDescriptions": [
+            "Google Gemini models.",
+            "OpenAI GPT models.",
+            "Anthropic Claude models.",
+            "Groq hosted inference.",
+            "OpenRouter unified model access.",
+            "Local Ollama OpenAI-compatible server.",
+            "Local LM Studio OpenAI-compatible server."
+          ],
+          "description": "AI provider used by Smart Runner AI features."
+        },
+        "smartRunner.ai.model": {
+          "type": "string",
+          "default": "gemini-2.5-pro",
+          "description": "Model name to use with the selected AI provider."
+        },
+        "smartRunner.ai.baseUrl": {
+          "type": "string",
+          "default": "https://generativelanguage.googleapis.com/v1beta",
+          "description": "Base URL for the selected AI provider. Local providers can use localhost URLs."
+        },
+        "smartRunner.ai.temperature": {
+          "type": "number",
+          "default": 0.2,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "AI response temperature."
+        },
+        "smartRunner.ai.maxTokens": {
+          "type": "number",
+          "default": 4096,
+          "minimum": 1,
+          "description": "Maximum tokens requested from the AI provider."
+        },
+        "smartRunner.ai.streaming": {
+          "type": "boolean",
+          "default": true,
+          "description": "Reserved setting for streaming AI responses. Sprint 15 sends non-streaming requests for stable output handling."
+        },
+        "smartRunner.ai.selectionCodeLens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Smart Runner run and AI CodeLens actions above selected code blocks."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "compile:test": "tsc -p ./tsconfig.test.json",
+    "test": "npm run compile:test && node --test \"out-test/test/**/*.test.js\"",
+    "package": "vsce package",
+    "watch": "tsc -watch -p ./",
+    "check": "tsc --noEmit -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/vscode": "^1.125.0",
+    "@vscode/vsce": "^3.9.2",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,10 @@
+.git/**
+.vscode/**
+node_modules/**
+src/**
+test/**
+out-test/**
+*.vsix
+tsconfig.json
+tsconfig.test.json
+package-lock.json
