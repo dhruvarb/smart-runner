@@ -12,9 +12,23 @@
   "engines": {
     "vscode": "^1.125.0"
   },
-  "categories": [
+  "categories":[
+    "Programming Languages",
+    "Linters",
     "Other"
-  ],
+],
+"keywords": [
+  "python",
+  "cpp",
+  "runner",
+  "code runner",
+  "snippet",
+  "execution",
+  "ai",
+  "developer tools",
+  "javascript",
+  "typescript"
+],
   "activationEvents": [
     "onStartupFinished",
     "onCommand:smartRunner.runSelectedSnippets",
