@@ -26,3 +26,4 @@
 - Added Smart Runner AI help panel and startup activation so AI selection helpers register immediately.
 - Added visible Run Selection CodeLens and status-bar buttons for selected code.
 - Added visible Explain Error CodeLens and status-bar buttons for selected code.
+- Added setup documentation and project banner.

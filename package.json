@@ -5,30 +5,34 @@
   "version": "0.0.1",
   "publisher": "dhruvarb",
   "license": "MIT",
+  "galleryBanner": {
+    "color": "#08364f",
+    "theme": "dark"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/smart-runner/smart-runner.git"
+    "url": "https://github.com/dhruvarb/smart-runner.git"
   },
   "engines": {
     "vscode": "^1.125.0"
   },
-  "categories":[
+  "categories": [
     "Programming Languages",
     "Linters",
     "Other"
-],
-"keywords": [
-  "python",
-  "cpp",
-  "runner",
-  "code runner",
-  "snippet",
-  "execution",
-  "ai",
-  "developer tools",
-  "javascript",
-  "typescript"
-],
+  ],
+  "keywords": [
+    "python",
+    "cpp",
+    "runner",
+    "code runner",
+    "snippet",
+    "execution",
+    "ai",
+    "developer tools",
+    "javascript",
+    "typescript"
+  ],
   "activationEvents": [
     "onStartupFinished",
     "onCommand:smartRunner.runSelectedSnippets",

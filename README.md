@@ -1,5 +1,7 @@
 # Smart Runner
 
+![Smart Runner banner](media/banner.png)
+
 Smart Runner is a Visual Studio Code extension for running selected code snippets with locally installed interpreters and compilers.
 
 ## Sprint 1 Status
@@ -184,6 +186,8 @@ Smart Runner AI: Explain Error
 If those buttons do not appear, make sure VS Code's `editor.codeLens` setting and Smart Runner's `smartRunner.ai.selectionCodeLens` setting are both enabled.
 
 ## Development
+
+For a full setup guide, see [SETUP.md](SETUP.md).
 
 Install dependencies:
 
